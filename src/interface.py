@@ -1,8 +1,14 @@
+from importlib import reload
+
 from maya import OpenMayaUI as omui
 import maya.cmds as cmds
 import os
 from shiboken2 import wrapInstance
 from PySide2.QtWidgets import QApplication, QDialog, QWidget, QVBoxLayout, QPushButton
+
+import maya_handler
+
+reload(maya_handler)
 
 
 class TootlkitWindow(QDialog):
@@ -26,7 +32,7 @@ class TootlkitWindow(QDialog):
         main_layout.addWidget(self.checker_deselect_btn)
 
     def init_logics(self) -> None:
-        pass
+        self.checker_deselect_btn.clicked.connect(maya_handler.checker_deselect)
 
 
 def create_window():
