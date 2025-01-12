@@ -55,9 +55,7 @@ def convert_face_numbers_to_correct_faces_object(
 def recurse_faces(
     obj: str, current_face: int, selected_faces: list[int], output_faces: list[int]
 ) -> None:
-    print(current_face)
     connected_faces = get_connected_faces(obj, current_face)
-    print(connected_faces)
     for face in connected_faces:
         if face in output_faces:
             continue
