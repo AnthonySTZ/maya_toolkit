@@ -2,13 +2,31 @@ from maya import OpenMayaUI as omui
 import maya.cmds as cmds
 import os
 from shiboken2 import wrapInstance
-from PySide2.QtWidgets import QApplication, QDialog, QWidget
+from PySide2.QtWidgets import QApplication, QDialog, QWidget, QVBoxLayout, QPushButton
 
 
 class TootlkitWindow(QDialog):
     def __init__(self, parent=None) -> None:
         super().__init__(parent)
+        self.init_ui()
+        self.init_logics()
+
+    def init_ui(self) -> None:
         self.setWindowTitle("Maya Toolkit")
+        self.setStyleSheet(
+            """
+                font-size: 10pt;
+            """
+        )
+
+        main_layout = QVBoxLayout()
+        self.setLayout(main_layout)
+
+        self.checker_deselect_btn = QPushButton("Checker Deselect")
+        main_layout.addWidget(self.checker_deselect_btn)
+
+    def init_logics(self) -> None:
+        pass
 
 
 def create_window():
