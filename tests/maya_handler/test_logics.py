@@ -26,4 +26,4 @@ def test_should_return_list_of_faces_numbers() -> None:
 def test_should_return_every_nth_of_list() -> None:
     test_list: list[int] = [14, 45, 12, 79, 12]
     n: int = 2
-    assert logics.remove_every_nth(test_list, n) == [14, 12, 12]
+    assert logics.keep_every_nth(test_list, n) == [14, 12, 12]
