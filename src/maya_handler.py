@@ -10,9 +10,7 @@ def select_every_nth(n: str) -> None:
         return
     selected_object = get_selected_object()
     selected_faces = get_selected_faces()
-    print(len(selected_faces))
     organize_selected_faces = reorganize_face_selection(selected_object, selected_faces)
-    print(len(organize_selected_faces))
     new_selected_faces = logics.keep_every_nth(organize_selected_faces, int(n))
     select_faces(selected_object, new_selected_faces)
 
@@ -57,6 +55,7 @@ def convert_face_numbers_to_correct_faces_object(
 def recurse_faces(
     obj: str, current_face: int, selected_faces: list[int], output_faces: list[int]
 ) -> None:
+    print(current_face)
     connected_faces = get_connected_faces(obj, current_face)
     print(connected_faces)
     for face in connected_faces:
@@ -70,7 +69,7 @@ def recurse_faces(
 
 def get_connected_faces(obj: str, face: int):
     edges = cmds.polyListComponentConversion(f"{obj}.f[{face}]", ff=True, te=True)
-    connected_faces = cmds.polyListComponentConversion(edges, fe=True, tf=True)
+    connected_faces = cmds.polyListComponentConversion(edges, fe=True, tf=True, bo=True)
     return logics.extract_faces_from_selection(connected_faces)
 
 
