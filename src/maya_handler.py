@@ -1,4 +1,8 @@
 import maya.cmds as cmds
+from importlib import reload
+import logics
+
+reload(logics)
 
 
 def checker_deselect() -> None:
@@ -11,25 +15,9 @@ def get_selected_faces() -> dict[str : list[int]]:
     if not selection:
         raise RuntimeError("No selection found. Please select some faces.")
     selected_object = selection[0].split(".")[0]
-    selected_faces = extract_faces_from_selection(selection)
+    selected_faces = logics.extract_faces_from_selection(selection)
     return {selected_object: selected_faces}
 
 
 def get_maya_selection() -> list[str]:
     return cmds.ls(selection=True, flatten=True)
-
-
-def extract_faces_from_selection(selection: list[str]) -> list[int]:
-    faces: list[int] = []
-    for sel in selection:
-        if is_face(sel):
-            faces.append(get_face_number_from(sel))
-    return faces
-
-
-def is_face(sel) -> bool:
-    return ".f[" in sel
-
-
-def get_face_number_from(face: str) -> int:
-    return face.split(".f[")[1][:-1]
