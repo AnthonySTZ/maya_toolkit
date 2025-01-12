@@ -11,4 +11,4 @@ def is_face(sel) -> bool:
 
 
 def get_face_number_from(face: str) -> int:
-    return face.split(".f[")[1][:-1]
+    return int(face.split(".f[")[1][:-1])
