@@ -12,3 +12,7 @@ def is_face(sel) -> bool:
 
 def get_face_number_from(face: str) -> int:
     return int(face.split(".f[")[1][:-1])
+
+
+def remove_every_nth(list_to_modify: list[int], n: int) -> list[int]:
+    return list_to_modify[::n]

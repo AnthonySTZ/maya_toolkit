@@ -21,3 +21,9 @@ def test_should_return_list_of_faces_numbers() -> None:
     faces_numbers: list[int] = [12, 4, 456]
     faces: list[str] = [f"pCube12.f[{number}]" for number in faces_numbers]
     assert logics.extract_faces_from_selection(faces) == faces_numbers
+
+
+def test_should_return_every_nth_of_list() -> None:
+    test_list: list[int] = [14, 45, 12, 79, 12]
+    n: int = 2
+    assert logics.remove_every_nth(test_list, n) == [14, 12, 12]

@@ -7,16 +7,18 @@ reload(logics)
 
 def checker_deselect() -> None:
     selected_faces = get_selected_faces()
-    print(selected_faces)
+    selected_faces["face_selection"] = logics.remove_every_nth(
+        selected_faces["face_selection"], 2
+    )
 
 
-def get_selected_faces() -> dict[str : list[int]]:
+def get_selected_faces() -> dict:
     selection = get_maya_selection()
     if not selection:
         raise RuntimeError("No selection found. Please select some faces.")
-    selected_object = selection[0].split(".")[0]
-    selected_faces = logics.extract_faces_from_selection(selection)
-    return {selected_object: selected_faces}
+    selected_object = {"obj": selection[0].split(".")[0], "face_selection": []}
+    selected_object["face_selection"] = logics.extract_faces_from_selection(selection)
+    return selected_object
 
 
 def get_maya_selection() -> list[str]:
