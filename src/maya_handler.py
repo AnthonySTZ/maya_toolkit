@@ -58,6 +58,7 @@ def recurse_faces(
     obj: str, current_face: int, selected_faces: list[int], output_faces: list[int]
 ) -> None:
     connected_faces = get_connected_faces(obj, current_face)
+    print(connected_faces)
     for face in connected_faces:
         if face in output_faces:
             continue
@@ -69,7 +70,7 @@ def recurse_faces(
 
 def get_connected_faces(obj: str, face: int):
     edges = cmds.polyListComponentConversion(f"{obj}.f[{face}]", ff=True, te=True)
-    connected_faces = cmds.polyListComponentConversion(edges, fe=True, tf=True, bo=True)
+    connected_faces = cmds.polyListComponentConversion(edges, fe=True, tf=True)
     return logics.extract_faces_from_selection(connected_faces)
 
 
