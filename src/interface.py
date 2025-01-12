@@ -2,7 +2,17 @@ from importlib import reload
 
 from maya import OpenMayaUI as omui
 from shiboken2 import wrapInstance
-from PySide2.QtWidgets import QApplication, QDialog, QWidget, QVBoxLayout, QPushButton
+from PySide2.QtWidgets import (
+    QApplication,
+    QDialog,
+    QWidget,
+    QVBoxLayout,
+    QPushButton,
+    QHBoxLayout,
+    QLabel,
+    QLineEdit,
+)
+from PySide2.QtGui import QIntValidator
 
 import maya_handler
 
@@ -26,11 +36,26 @@ class TootlkitWindow(QDialog):
         main_layout = QVBoxLayout()
         self.setLayout(main_layout)
 
-        self.checker_deselect_btn = QPushButton("Checker Deselect")
-        main_layout.addWidget(self.checker_deselect_btn)
+        first_row_layout = QHBoxLayout()
+        first_row_widget = QWidget()
+        first_row_widget.setLayout(first_row_layout)
+        main_layout.addWidget(first_row_widget)
+
+        select_every_label = QLabel("Select every")
+        self.select_every_le = QLineEdit()
+        self.select_every_le.setValidator(QIntValidator(1, 999, self))
+        faces_label = QLabel("faces")
+        self.select_every_nth_btn = QPushButton("Confirm")
+
+        first_row_layout.addWidget(select_every_label)
+        first_row_layout.addWidget(self.select_every_le)
+        first_row_layout.addWidget(faces_label)
+        first_row_layout.addWidget(self.select_every_nth_btn)
 
     def init_logics(self) -> None:
-        self.checker_deselect_btn.clicked.connect(maya_handler.checker_deselect)
+        self.select_every_nth_btn.clicked.connect(
+            lambda _: maya_handler.select_every_nth(self.select_every_le.text())
+        )
 
 
 def create_window():

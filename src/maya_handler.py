@@ -5,10 +5,12 @@ import logics
 reload(logics)
 
 
-def checker_deselect() -> None:
+def select_every_nth(n: str) -> None:
+    if not n.isnumeric():
+        return
     selected_object = get_selected_object()
     selected_faces = get_selected_faces()
-    new_selected_faces = logics.keep_every_nth(selected_faces, 2)
+    new_selected_faces = logics.keep_every_nth(selected_faces, int(n))
     new_selection = convert_face_numbers_to_correct_faces_object(
         new_selected_faces, selected_object
     )
