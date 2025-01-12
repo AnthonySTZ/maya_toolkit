@@ -8,10 +8,12 @@ reload(logics)
 def checker_deselect() -> None:
     selected_object = get_selected_object()
     selected_faces = get_selected_faces()
-    selected_faces = logics.remove_every_nth(selected_faces, 2)
-
-    print(selected_object)
-    print(selected_faces)
+    new_selected_faces = logics.remove_every_nth(selected_faces, 2)
+    new_selection = convert_face_numbers_to_correct_faces_object(
+        new_selected_faces, selected_object
+    )
+    cmds.select(clear=True)
+    cmds.select(new_selection)
 
 
 def get_selected_object() -> str:
@@ -31,3 +33,9 @@ def get_maya_selection() -> list[str]:
     if not selection:
         raise RuntimeError("No selection found. Please select some faces.")
     return selection
+
+
+def convert_face_numbers_to_correct_faces_object(
+    faces: list[int], object: str
+) -> list[str]:
+    return [f"{object}.f[{face_number}]" for face_number in faces]
