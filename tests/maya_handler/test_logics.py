@@ -12,9 +12,8 @@ def test_should_return_true_with_invalid_face() -> None:
 
 
 def test_should_return_face_number() -> None:
-    face_number: int = 54
-    face: str = f"pCylinder2.f[{face_number}]"
-    assert logics.get_face_number_from(face) == 54
+    face: str = f"pCylinder2.f[54:56]"
+    assert logics.get_face_number_from(face) == [54, 55, 56]
 
 
 def test_should_return_list_of_faces_numbers() -> None:
