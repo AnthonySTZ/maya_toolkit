@@ -1,6 +1,6 @@
 from importlib import reload
 
-from maya import OpenMayaUI as omui
+from maya import OpenMayaUI as omui  # type: ignore
 from shiboken2 import wrapInstance
 from PySide2.QtWidgets import (
     QApplication,
