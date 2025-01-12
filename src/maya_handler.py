@@ -1,4 +1,4 @@
-import maya.cmds as cmds
+import maya.cmds as cmds  # type: ignore
 from importlib import reload
 import logics
 
