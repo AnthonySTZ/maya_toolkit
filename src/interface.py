@@ -1,8 +1,6 @@
 from importlib import reload
 
 from maya import OpenMayaUI as omui
-import maya.cmds as cmds
-import os
 from shiboken2 import wrapInstance
 from PySide2.QtWidgets import QApplication, QDialog, QWidget, QVBoxLayout, QPushButton
 
