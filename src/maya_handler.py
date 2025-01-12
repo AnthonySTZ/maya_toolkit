@@ -10,20 +10,10 @@ def select_every_nth(n: str) -> None:
         return
     selected_object = get_selected_object()
     selected_faces = get_selected_faces()
-    start_face = get_start_face(selected_object, selected_faces)
-    output_faces = [start_face]
-    recurse_faces(
-        selected_object,
-        start_face,
-        selected_faces,
-        output_faces,
-    )
-    new_selected_faces = logics.keep_every_nth(output_faces, int(n))
-    new_selection = convert_face_numbers_to_correct_faces_object(
-        new_selected_faces, selected_object
-    )
-    cmds.select(clear=True)
-    cmds.select(new_selection)
+    organize_selected_faces = reorganize_face_selection(selected_object, selected_faces)
+
+    new_selected_faces = logics.keep_every_nth(organize_selected_faces, int(n))
+    select_faces(selected_object, new_selected_faces)
 
 
 def get_selected_object() -> str:
@@ -45,8 +35,20 @@ def get_maya_selection() -> list[str]:
     return selection
 
 
+def reorganize_face_selection(obj: str, faces: list[int]) -> list[int]:
+    start_face = get_start_face(obj, faces)
+    output_faces = [start_face]
+    recurse_faces(
+        obj,
+        start_face,
+        faces,
+        output_faces,
+    )
+    return output_faces
+
+
 def convert_face_numbers_to_correct_faces_object(
-    faces: list[int], object: str
+    object: str, faces: list[int]
 ) -> list[str]:
     return [f"{object}.f[{face_number}]" for face_number in faces]
 
@@ -91,3 +93,9 @@ def select_by_number_of_neighbours(
         if len(selected_connected_faces) == nb_of_neighbours:
             output_faces.append(face)
     return output_faces
+
+
+def select_faces(obj: str, faces: list[int]) -> None:
+    format_faces = convert_face_numbers_to_correct_faces_object(obj, faces)
+    cmds.select(clear=True)
+    cmds.select(format_faces)
