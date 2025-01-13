@@ -13,9 +13,10 @@ from PySide2.QtWidgets import (
     QLineEdit,
 )
 from PySide2.QtGui import QIntValidator
+import maya_handler
 
-import select_every
-import clean_combine
+reload(maya_handler)
+from maya_handler import select_every, clean_combine
 
 reload(select_every)
 reload(clean_combine)

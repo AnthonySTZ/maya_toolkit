@@ -1,4 +1,4 @@
-import src.logics as logics
+import src.maya_handler.logics as logics
 
 
 def test_should_return_true_with_valid_face() -> None:
