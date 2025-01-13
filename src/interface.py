@@ -53,12 +53,14 @@ class TootlkitWindow(QDialog):
         self.clean_separate_btn = QPushButton("Clean separate")
         self.pivot_to_bottom_btn = QPushButton("Pivot to bottom")
         self.restore_translate_btn = QPushButton("Restore translate")
+        self.center_objects_btn = QPushButton("Center objects")
 
         main_layout.addWidget(self.select_every_nth_btn)
         main_layout.addWidget(self.clean_combine_btn)
         main_layout.addWidget(self.clean_separate_btn)
         main_layout.addWidget(self.pivot_to_bottom_btn)
         main_layout.addWidget(self.restore_translate_btn)
+        main_layout.addWidget(self.center_objects_btn)
 
     def init_logics(self) -> None:
         self.select_every_nth_btn.clicked.connect(
@@ -68,6 +70,7 @@ class TootlkitWindow(QDialog):
         self.clean_separate_btn.clicked.connect(clean_separate.clean_separate)
         self.pivot_to_bottom_btn.clicked.connect(pivot_to_bottom.pivot_to_bottom)
         self.restore_translate_btn.clicked.connect(restore_translate.restore_translate)
+        self.restore_translate_btn.clicked.connect(center_objects.center_objects)
 
 
 class SelectEveryNthDialog(QDialog):
