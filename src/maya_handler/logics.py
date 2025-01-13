@@ -1,17 +1,17 @@
-def extract_faces_from_selection(selection: list[str]) -> list[int]:
-    faces: list[int] = []
+def extract_faces_from_selection(selection):
+    faces = []
     for sel in selection:
         if is_face(sel):
             faces.extend(get_face_number_from(sel))
     return faces
 
 
-def is_face(sel) -> bool:
+def is_face(sel):
     return ".f[" in sel
 
 
-def get_face_number_from(face: str) -> list[int]:
-    number: str = face.split(".f[")[1][:-1]
+def get_face_number_from(face):
+    number = face.split(".f[")[1][:-1]
     if ":" not in number:
         return [int(number)]
 
@@ -21,5 +21,5 @@ def get_face_number_from(face: str) -> list[int]:
     return numbers
 
 
-def keep_every_nth(list_to_modify: list[int], n: int) -> list[int]:
+def keep_every_nth(list_to_modify, n):
     return list_to_modify[::n]

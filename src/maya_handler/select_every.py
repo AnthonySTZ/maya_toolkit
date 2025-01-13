@@ -5,7 +5,7 @@ import maya_handler.logics as logics
 reload(logics)
 
 
-def select_every_nth(n: str) -> None:
+def select_every_nth(n):
     if not n.isnumeric():
         return
     selected_object = get_selected_object()
@@ -15,26 +15,26 @@ def select_every_nth(n: str) -> None:
     select_faces(selected_object, new_selected_faces)
 
 
-def get_selected_object() -> str:
+def get_selected_object():
     selection = get_maya_selection()
     selected_object = selection[0].split(".")[0]
     return selected_object
 
 
-def get_selected_faces() -> list[int]:
+def get_selected_faces():
     selection = get_maya_selection()
     selected_faces = logics.extract_faces_from_selection(selection)
     return selected_faces
 
 
-def get_maya_selection() -> list[str]:
+def get_maya_selection():
     selection = cmds.ls(selection=True, flatten=True)
     if not selection:
         raise RuntimeError("No selection found. Please select some faces.")
     return selection
 
 
-def reorganize_face_selection(obj: str, faces: list[int]) -> list[int]:
+def reorganize_face_selection(obj, faces):
     start_face = get_start_face(obj, faces)
     output_faces = [start_face]
     recurse_faces(
@@ -46,15 +46,11 @@ def reorganize_face_selection(obj: str, faces: list[int]) -> list[int]:
     return output_faces
 
 
-def convert_face_numbers_to_correct_faces_object(
-    object: str, faces: list[int]
-) -> list[str]:
+def convert_face_numbers_to_correct_faces_object(object, faces):
     return [f"{object}.f[{face_number}]" for face_number in faces]
 
 
-def recurse_faces(
-    obj: str, current_face: int, selected_faces: list[int], output_faces: list[int]
-) -> None:
+def recurse_faces(obj, current_face, selected_faces, output_faces) -> None:
     connected_faces = get_connected_faces(obj, current_face)
     for face in connected_faces:
         if face in output_faces:
@@ -65,23 +61,21 @@ def recurse_faces(
         recurse_faces(obj, face, selected_faces, output_faces)
 
 
-def get_connected_faces(obj: str, face: int):
+def get_connected_faces(obj, face):
     edges = cmds.polyListComponentConversion(f"{obj}.f[{face}]", ff=True, te=True)
     connected_faces = cmds.polyListComponentConversion(edges, fe=True, tf=True, bo=True)
     return logics.extract_faces_from_selection(connected_faces)
 
 
-def get_start_face(obj: str, faces: list[int]) -> int:
+def get_start_face(obj, faces):
     boudaries = select_by_number_of_neighbours(obj, faces, 1)
     if boudaries:
         return boudaries[0]
     return faces[0]
 
 
-def select_by_number_of_neighbours(
-    obj: str, faces: list[int], nb_of_neighbours: int
-) -> list[int]:
-    output_faces: list[int] = []
+def select_by_number_of_neighbours(obj, faces, nb_of_neighbours):
+    output_faces = []
     for face in faces:
         connected_faces = get_connected_faces(obj, face)
         selected_connected_faces = [
@@ -92,7 +86,7 @@ def select_by_number_of_neighbours(
     return output_faces
 
 
-def select_faces(obj: str, faces: list[int]) -> None:
+def select_faces(obj, faces):
     format_faces = convert_face_numbers_to_correct_faces_object(obj, faces)
     cmds.select(clear=True)
     cmds.select(format_faces)
