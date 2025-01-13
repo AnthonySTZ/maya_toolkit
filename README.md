@@ -6,7 +6,7 @@ This toolkit will have more and more useful scripts that can speed up repetitive
 
 ![interface](./readme/interface.jpg)
 
-### Select every nth faces
+## Select every nth faces
 
 You select some continuous faces.
 
