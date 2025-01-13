@@ -16,10 +16,11 @@ from PySide2.QtGui import QIntValidator
 import maya_handler
 
 reload(maya_handler)
-from maya_handler import select_every, clean_combine
+from maya_handler import select_every, clean_combine, clean_separate
 
 reload(select_every)
 reload(clean_combine)
+reload(clean_separate)
 
 
 class TootlkitWindow(QDialog):
@@ -41,15 +42,18 @@ class TootlkitWindow(QDialog):
 
         self.select_every_nth_btn = QPushButton("Select every nth faces")
         self.clean_combine_btn = QPushButton("Clean combine")
+        self.clean_separate_btn = QPushButton("Clean separate")
 
         main_layout.addWidget(self.select_every_nth_btn)
         main_layout.addWidget(self.clean_combine_btn)
+        main_layout.addWidget(self.clean_separate_btn)
 
     def init_logics(self) -> None:
         self.select_every_nth_btn.clicked.connect(
             lambda _: SelectEveryNthDialog().exec_()
         )
         self.clean_combine_btn.clicked.connect(clean_combine.clean_combine)
+        self.clean_separate_btn.clicked.connect(clean_separate.clean_separate)
 
 
 class SelectEveryNthDialog(QDialog):
