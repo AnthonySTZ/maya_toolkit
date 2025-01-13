@@ -41,3 +41,17 @@ Center selected objects to the world center.
 
 ![](./readme/before_center.jpg)
 ![](./readme/after_center.jpg)
+
+## Center objects to floor
+
+Move selected objects to the center on the grid.
+
+![](./readme/before_drop_to_center.jpg)
+![](./readme/after_drop_to_center.jpg)
+
+## Drop to floor
+
+Move selected objects on the grid only on the y-axis.
+
+![](./readme/before_drop_to_floor.jpg)
+![](./readme/after_drop_to_floor.jpg)
