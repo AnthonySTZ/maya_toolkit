@@ -17,7 +17,7 @@ import maya_handler
 
 reload(maya_handler)
 from maya_handler import (
-    center_floor,
+    drop_to_floor,
     select_every,
     clean_combine,
     clean_separate,
@@ -32,7 +32,7 @@ reload(clean_separate)
 reload(pivot_to_bottom)
 reload(restore_translate)
 reload(center_objects)
-reload(center_floor)
+reload(drop_to_floor)
 
 
 class TootlkitWindow(QDialog):
@@ -77,7 +77,7 @@ class TootlkitWindow(QDialog):
         self.pivot_to_bottom_btn.clicked.connect(pivot_to_bottom.pivot_to_bottom)
         self.restore_translate_btn.clicked.connect(restore_translate.restore_translate)
         self.center_objects_btn.clicked.connect(center_objects.center_objects)
-        self.center_floor_btn.clicked.connect(center_floor.center_floor)
+        self.center_floor_btn.clicked.connect(drop_to_floor.center_floor)
 
 
 class SelectEveryNthDialog(QDialog):
