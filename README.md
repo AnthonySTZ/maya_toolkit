@@ -28,3 +28,16 @@ Translate on the y-axis your object pivot to the lowest point.
 ![](./readme/pivot_middle.jpg)
 ![](./readme/pivot_bottom.jpg)
 
+## Restore translation
+
+Restore the xform translate to worldspace.
+
+![](./readme/before_restore.jpg)
+![](./readme/after_restore.jpg)
+
+## Center objects
+
+Center selected objects to the world center.
+
+![](./readme/before_center.jpg)
+![](./readme/after_center.jpg)
