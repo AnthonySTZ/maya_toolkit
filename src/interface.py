@@ -16,11 +16,12 @@ from PySide2.QtGui import QIntValidator
 import maya_handler
 
 reload(maya_handler)
-from maya_handler import select_every, clean_combine, clean_separate
+from maya_handler import select_every, clean_combine, clean_separate, pivot_to_bottom
 
 reload(select_every)
 reload(clean_combine)
 reload(clean_separate)
+reload(pivot_to_bottom)
 
 
 class TootlkitWindow(QDialog):
@@ -43,10 +44,12 @@ class TootlkitWindow(QDialog):
         self.select_every_nth_btn = QPushButton("Select every nth faces")
         self.clean_combine_btn = QPushButton("Clean combine")
         self.clean_separate_btn = QPushButton("Clean separate")
+        self.pivot_to_bottom_btn = QPushButton("Pivot to bottom")
 
         main_layout.addWidget(self.select_every_nth_btn)
         main_layout.addWidget(self.clean_combine_btn)
         main_layout.addWidget(self.clean_separate_btn)
+        main_layout.addWidget(self.pivot_to_bottom_btn)
 
     def init_logics(self) -> None:
         self.select_every_nth_btn.clicked.connect(
@@ -54,6 +57,7 @@ class TootlkitWindow(QDialog):
         )
         self.clean_combine_btn.clicked.connect(clean_combine.clean_combine)
         self.clean_separate_btn.clicked.connect(clean_separate.clean_separate)
+        self.pivot_to_bottom_btn.clicked.connect(pivot_to_bottom.pivot_to_bottom)
 
 
 class SelectEveryNthDialog(QDialog):
