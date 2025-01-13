@@ -72,7 +72,7 @@ class TootlkitWindow(QDialog):
         self.clean_separate_btn.clicked.connect(clean_separate.clean_separate)
         self.pivot_to_bottom_btn.clicked.connect(pivot_to_bottom.pivot_to_bottom)
         self.restore_translate_btn.clicked.connect(restore_translate.restore_translate)
-        self.restore_translate_btn.clicked.connect(center_objects.center_objects)
+        self.center_objects_btn.clicked.connect(center_objects.center_objects)
 
 
 class SelectEveryNthDialog(QDialog):
