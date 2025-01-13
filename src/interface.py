@@ -23,6 +23,7 @@ from maya_handler import (
     pivot_to_bottom,
     restore_translate,
     center_objects,
+    drop_to_floor,
 )
 
 reload(select_every)
@@ -31,6 +32,7 @@ reload(clean_separate)
 reload(pivot_to_bottom)
 reload(restore_translate)
 reload(center_objects)
+reload(drop_to_floor)
 
 
 class TootlkitWindow(QDialog):
@@ -56,6 +58,7 @@ class TootlkitWindow(QDialog):
         self.pivot_to_bottom_btn = QPushButton("Pivot to bottom")
         self.restore_translate_btn = QPushButton("Restore translate")
         self.center_objects_btn = QPushButton("Center objects")
+        self.drop_to_floor_btn = QPushButton("Drop objects to floor")
 
         main_layout.addWidget(self.select_every_nth_btn)
         main_layout.addWidget(self.clean_combine_btn)
@@ -63,6 +66,7 @@ class TootlkitWindow(QDialog):
         main_layout.addWidget(self.pivot_to_bottom_btn)
         main_layout.addWidget(self.restore_translate_btn)
         main_layout.addWidget(self.center_objects_btn)
+        main_layout.addWidget(self.drop_to_floor_btn)
 
     def init_logics(self) -> None:
         self.select_every_nth_btn.clicked.connect(
@@ -73,6 +77,7 @@ class TootlkitWindow(QDialog):
         self.pivot_to_bottom_btn.clicked.connect(pivot_to_bottom.pivot_to_bottom)
         self.restore_translate_btn.clicked.connect(restore_translate.restore_translate)
         self.center_objects_btn.clicked.connect(center_objects.center_objects)
+        self.drop_to_floor_btn.clicked.connect(drop_to_floor.drop_to_floor)
 
 
 class SelectEveryNthDialog(QDialog):
