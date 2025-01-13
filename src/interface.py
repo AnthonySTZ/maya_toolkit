@@ -16,12 +16,19 @@ from PySide2.QtGui import QIntValidator
 import maya_handler
 
 reload(maya_handler)
-from maya_handler import select_every, clean_combine, clean_separate, pivot_to_bottom
+from maya_handler import (
+    select_every,
+    clean_combine,
+    clean_separate,
+    pivot_to_bottom,
+    restore_translate,
+)
 
 reload(select_every)
 reload(clean_combine)
 reload(clean_separate)
 reload(pivot_to_bottom)
+reload(restore_translate)
 
 
 class TootlkitWindow(QDialog):
@@ -45,11 +52,13 @@ class TootlkitWindow(QDialog):
         self.clean_combine_btn = QPushButton("Clean combine")
         self.clean_separate_btn = QPushButton("Clean separate")
         self.pivot_to_bottom_btn = QPushButton("Pivot to bottom")
+        self.restore_translate_btn = QPushButton("Restore translate")
 
         main_layout.addWidget(self.select_every_nth_btn)
         main_layout.addWidget(self.clean_combine_btn)
         main_layout.addWidget(self.clean_separate_btn)
         main_layout.addWidget(self.pivot_to_bottom_btn)
+        main_layout.addWidget(self.restore_translate_btn)
 
     def init_logics(self) -> None:
         self.select_every_nth_btn.clicked.connect(
@@ -58,6 +67,7 @@ class TootlkitWindow(QDialog):
         self.clean_combine_btn.clicked.connect(clean_combine.clean_combine)
         self.clean_separate_btn.clicked.connect(clean_separate.clean_separate)
         self.pivot_to_bottom_btn.clicked.connect(pivot_to_bottom.pivot_to_bottom)
+        self.restore_translate_btn.clicked.connect(restore_translate.restore_translate)
 
 
 class SelectEveryNthDialog(QDialog):
