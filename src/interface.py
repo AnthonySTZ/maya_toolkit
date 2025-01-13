@@ -22,6 +22,7 @@ from maya_handler import (
     clean_separate,
     pivot_to_bottom,
     restore_translate,
+    center_objects,
 )
 
 reload(select_every)
@@ -29,6 +30,7 @@ reload(clean_combine)
 reload(clean_separate)
 reload(pivot_to_bottom)
 reload(restore_translate)
+reload(center_objects)
 
 
 class TootlkitWindow(QDialog):
