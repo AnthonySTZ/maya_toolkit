@@ -36,10 +36,31 @@ class TootlkitWindow(QDialog):
         main_layout = QVBoxLayout()
         self.setLayout(main_layout)
 
-        first_row_layout = QHBoxLayout()
-        first_row_widget = QWidget()
-        first_row_widget.setLayout(first_row_layout)
-        main_layout.addWidget(first_row_widget)
+        self.select_every_nth_btn = QPushButton("Select every nth faces")
+
+        main_layout.addWidget(self.select_every_nth_btn)
+
+    def init_logics(self) -> None:
+        self.select_every_nth_btn.clicked.connect(
+            lambda _: SelectEveryNthDialog().exec_()
+        )
+
+
+class SelectEveryNthDialog(QDialog):
+    def __init__(self, parent=None) -> None:
+        super().__init__(parent)
+
+        self.init_ui()
+        self.init_logics()
+
+    def init_ui(self) -> None:
+        main_layout = QHBoxLayout()
+        self.setLayout(main_layout)
+        self.setStyleSheet(
+            """
+                font-size: 10pt;
+            """
+        )
 
         select_every_label = QLabel("Select every")
         self.select_every_le = QLineEdit()
@@ -47,15 +68,17 @@ class TootlkitWindow(QDialog):
         faces_label = QLabel("faces")
         self.select_every_nth_btn = QPushButton("Confirm")
 
-        first_row_layout.addWidget(select_every_label)
-        first_row_layout.addWidget(self.select_every_le)
-        first_row_layout.addWidget(faces_label)
-        first_row_layout.addWidget(self.select_every_nth_btn)
+        main_layout.addWidget(select_every_label)
+        main_layout.addWidget(self.select_every_le)
+        main_layout.addWidget(faces_label)
+        main_layout.addWidget(self.select_every_nth_btn)
 
     def init_logics(self) -> None:
-        self.select_every_nth_btn.clicked.connect(
-            lambda _: maya_handler.select_every_nth(self.select_every_le.text())
-        )
+        self.select_every_nth_btn.clicked.connect(self.select_every_nth)
+
+    def select_every_nth(self) -> None:
+        maya_handler.select_every_nth(self.select_every_le.text())
+        self.close()
 
 
 def create_window():
