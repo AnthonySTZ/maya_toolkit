@@ -9,6 +9,8 @@ reload(transform)
 
 def merge_curves():
     curves = selection.get_selected_objects()
+    if len(curves) < 2:
+        return
     for curve in curves:
         transform.freeze_transform(curve)
     curves_shapes = selection.get_shapes_of(curves)
