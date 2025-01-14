@@ -13,6 +13,7 @@ from PySide2.QtWidgets import (
     QLineEdit,
 )
 from PySide2.QtGui import QIntValidator
+from PySide2.QtCore import Qt
 import maya_handler
 
 reload(maya_handler)
@@ -41,7 +42,6 @@ class TootlkitWindow(QDialog):
     def __init__(self, parent=None) -> None:
         super().__init__(parent)
         self.init_ui()
-        self.init_logics()
 
     def init_ui(self) -> None:
         self.setWindowTitle("Maya Toolkit")
@@ -54,38 +54,67 @@ class TootlkitWindow(QDialog):
         main_layout = QVBoxLayout()
         self.setLayout(main_layout)
 
-        self.select_every_nth_btn = QPushButton("Select every nth faces")
-        self.clean_combine_btn = QPushButton("Clean combine")
-        self.clean_separate_btn = QPushButton("Clean separate")
-        self.pivot_to_bottom_btn = QPushButton("Pivot to bottom")
-        self.restore_translate_btn = QPushButton("Restore translate")
-        self.center_objects_btn = QPushButton("Center objects")
-        self.center_floor_btn = QPushButton("Center objects to floor")
-        self.drop_to_floor_btn = QPushButton("Drop to floor")
-        self.merge_curves_btn = QPushButton("Merge curves")
-
-        main_layout.addWidget(self.select_every_nth_btn)
-        main_layout.addWidget(self.clean_combine_btn)
-        main_layout.addWidget(self.clean_separate_btn)
-        main_layout.addWidget(self.pivot_to_bottom_btn)
-        main_layout.addWidget(self.restore_translate_btn)
-        main_layout.addWidget(self.center_objects_btn)
-        main_layout.addWidget(self.center_floor_btn)
-        main_layout.addWidget(self.drop_to_floor_btn)
-        main_layout.addWidget(self.merge_curves_btn)
-
-    def init_logics(self) -> None:
-        self.select_every_nth_btn.clicked.connect(
-            lambda _: SelectEveryNthDialog().exec_()
+        selection_row = Row(
+            "Selection",
+            [["Select every nth faces", lambda _: SelectEveryNthDialog().exec_()]],
         )
-        self.clean_combine_btn.clicked.connect(clean_combine.clean_combine)
-        self.clean_separate_btn.clicked.connect(clean_separate.clean_separate)
-        self.pivot_to_bottom_btn.clicked.connect(pivot_to_bottom.pivot_to_bottom)
-        self.restore_translate_btn.clicked.connect(restore_translate.restore_translate)
-        self.center_objects_btn.clicked.connect(center_objects.center_objects)
-        self.center_floor_btn.clicked.connect(drop_to_floor.center_floor)
-        self.drop_to_floor_btn.clicked.connect(drop_to_floor.drop_to_floor)
-        self.merge_curves_btn.clicked.connect(merge_curves.merge_curves)
+
+        object_row = Row(
+            "Object",
+            [
+                ["Clean combine", clean_combine.clean_combine],
+                ["Clean separate", clean_separate.clean_separate],
+                ["Merge curves", merge_curves.merge_curves],
+            ],
+        )
+
+        transform_row = Row(
+            "Transform",
+            [
+                ["Center objects", center_objects.center_objects],
+                ["Center objects to floor", drop_to_floor.center_floor],
+                ["Drop to floor", drop_to_floor.drop_to_floor],
+                ["Pivot to bottom", pivot_to_bottom.pivot_to_bottom],
+                ["Restore translate", restore_translate.restore_translate],
+            ],
+        )
+
+        main_layout.addWidget(selection_row)
+        main_layout.addWidget(object_row)
+        main_layout.addWidget(transform_row)
+
+
+class Row(QWidget):
+    def __init__(self, name, items):
+        super().__init__()
+        self.init_ui(name, items)
+
+    def init_ui(self, name, items):
+        main_layout = QVBoxLayout()
+        self.setLayout(main_layout)
+        main_layout.setContentsMargins(0, 0, 0, 0)
+
+        title = QLabel(name)
+        title.setAlignment(Qt.AlignCenter)
+        main_layout.addWidget(title)
+
+        row_layout = QHBoxLayout()
+        row_widget = QWidget()
+        row_widget.setStyleSheet(
+            """
+                .QWidget{
+                    border-top: 1px solid grey;
+                }
+            """
+        )
+        row_widget.setLayout(row_layout)
+
+        for item in items:
+            btn = QPushButton(item[0])
+            btn.clicked.connect(item[1])
+            row_layout.addWidget(btn)
+
+        main_layout.addWidget(row_widget)
 
 
 class SelectEveryNthDialog(QDialog):
