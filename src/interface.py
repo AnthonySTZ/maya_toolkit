@@ -24,6 +24,7 @@ from maya_handler import (
     pivot_to_bottom,
     restore_translate,
     center_objects,
+    merge_curves,
 )
 
 reload(select_every)
@@ -33,6 +34,7 @@ reload(pivot_to_bottom)
 reload(restore_translate)
 reload(center_objects)
 reload(drop_to_floor)
+reload(merge_curves)
 
 
 class TootlkitWindow(QDialog):
@@ -83,6 +85,7 @@ class TootlkitWindow(QDialog):
         self.center_objects_btn.clicked.connect(center_objects.center_objects)
         self.center_floor_btn.clicked.connect(drop_to_floor.center_floor)
         self.drop_to_floor_btn.clicked.connect(drop_to_floor.drop_to_floor)
+        self.merge_curves_btn.clicked.connect(merge_curves.merge_curves)
 
 
 class SelectEveryNthDialog(QDialog):
