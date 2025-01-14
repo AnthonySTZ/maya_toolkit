@@ -3,6 +3,7 @@ from importlib import reload
 from maya_handler import logics, selection
 
 reload(logics)
+reload(selection)
 
 
 def select_every_nth(n):
@@ -12,7 +13,7 @@ def select_every_nth(n):
     selected_faces = selection.get_selected_faces()
     organize_selected_faces = reorganize_face_selection(selected_object, selected_faces)
     new_selected_faces = logics.keep_every_nth(organize_selected_faces, int(n))
-    select_faces(selected_object, new_selected_faces)
+    selection.select_faces_from(selected_object, new_selected_faces)
 
 
 def reorganize_face_selection(obj, faces):
@@ -61,9 +62,3 @@ def select_by_number_of_neighbours(obj, faces, nb_of_neighbours):
         if len(selected_connected_faces) == nb_of_neighbours:
             output_faces.append(face)
     return output_faces
-
-
-def select_faces(obj, faces):
-    format_faces = logics.convert_face_numbers_to_correct_faces_object(obj, faces)
-    cmds.select(clear=True)
-    cmds.select(format_faces)
