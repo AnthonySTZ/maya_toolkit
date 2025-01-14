@@ -2,11 +2,12 @@ import maya.cmds as cmds  # type: ignore
 
 from importlib import reload
 
-from maya_handler import center_objects, pivot_to_bottom, selection
+from maya_handler import center_objects, pivot_to_bottom, selection, transform
 
 reload(center_objects)
 reload(pivot_to_bottom)
 reload(selection)
+reload(transform)
 
 
 def center_floor():
@@ -22,15 +23,7 @@ def drop_to_floor():
 
 
 def floor_obj(object):
-    freeze_transform(object)
-    obj_pos = get_obj_position_in_worldspace(object)
+    transform.freeze_transform(object)
+    obj_pos = transform.get_obj_position_in_worldspace(object)
     cmds.move(0, -obj_pos[1], 0, object, ls=True)  # center object to floor
-    freeze_transform(object)
-
-
-def get_obj_position_in_worldspace(object):
-    return list(cmds.getAttr(object + ".rotatePivot")[0])
-
-
-def freeze_transform(object):
-    cmds.makeIdentity(object, a=True)
+    transform.freeze_transform(object)

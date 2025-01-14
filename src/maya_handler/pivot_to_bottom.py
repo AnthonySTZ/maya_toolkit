@@ -1,8 +1,9 @@
 import maya.cmds as cmds  # type: ignore
 from importlib import reload
-from maya_handler import selection
+from maya_handler import selection, transform
 
 reload(selection)
+reload(transform)
 
 
 def pivot_to_bottom():
@@ -17,6 +18,6 @@ def get_y_min(obj):
 
 def set_pivot_bottom(obj):
     y_min = get_y_min(obj)
-    pivot_pos = cmds.xform(obj, q=True, ws=True, rp=True)
+    pivot_pos = transform.get_pivot_pos_of(obj)
     pivot_pos[1] = y_min
     cmds.xform(obj, ws=True, piv=pivot_pos)
