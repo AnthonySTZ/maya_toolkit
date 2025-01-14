@@ -23,3 +23,7 @@ def get_face_number_from(face):
 
 def keep_every_nth(list_to_modify, n):
     return list_to_modify[::n]
+
+
+def convert_face_numbers_to_correct_faces_object(object, faces):
+    return [f"{object}.f[{face_number}]" for face_number in faces]

@@ -26,3 +26,13 @@ def test_should_return_every_nth_of_list() -> None:
     test_list: list[int] = [14, 45, 12, 79, 12]
     n: int = 2
     assert logics.keep_every_nth(test_list, n) == [14, 12, 12]
+
+
+def test_should_return_faces_obj() -> None:
+    faces: list[int] = [14, 15, 851]
+    object_name: str = "myObj"
+    result: list[str] = ["myObj.f[14]", "myObj.f[15]", "myObj.f[851]"]
+    assert (
+        logics.convert_face_numbers_to_correct_faces_object(object_name, faces)
+        == result
+    )

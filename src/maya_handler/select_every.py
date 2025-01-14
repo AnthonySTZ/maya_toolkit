@@ -27,10 +27,6 @@ def reorganize_face_selection(obj, faces):
     return output_faces
 
 
-def convert_face_numbers_to_correct_faces_object(object, faces):
-    return [f"{object}.f[{face_number}]" for face_number in faces]
-
-
 def recurse_faces(obj, current_face, selected_faces, output_faces) -> None:
     connected_faces = get_connected_faces(obj, current_face)
     for face in connected_faces:
@@ -68,6 +64,6 @@ def select_by_number_of_neighbours(obj, faces, nb_of_neighbours):
 
 
 def select_faces(obj, faces):
-    format_faces = convert_face_numbers_to_correct_faces_object(obj, faces)
+    format_faces = logics.convert_face_numbers_to_correct_faces_object(obj, faces)
     cmds.select(clear=True)
     cmds.select(format_faces)
