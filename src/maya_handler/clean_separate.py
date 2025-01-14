@@ -1,13 +1,13 @@
 import maya.cmds as cmds  # type: ignore
+from importlib import reload
+from maya_handler import selection
+
+reload(selection)
 
 
 def clean_separate():
-    faces = get_selected_faces()
+    faces = selection.get_selected_objects(flatten=False)
     separate(faces)
-
-
-def get_selected_faces():
-    return cmds.ls(sl=True, o=True)
 
 
 def separate(faces):

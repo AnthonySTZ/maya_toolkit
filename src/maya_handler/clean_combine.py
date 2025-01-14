@@ -1,16 +1,13 @@
 import maya.cmds as cmds  # type: ignore
+from importlib import reload
+from maya_handler import selection
+
+reload(selection)
 
 
 def clean_combine():
-    objects = get_selected_objects()
+    objects = selection.get_selected_objects(flatten=False)
     combine(objects)
-
-
-def get_selected_objects():
-    selection = cmds.ls(sl=True, o=True)
-    if len(selection) < 2:
-        raise RuntimeError("Please select at least two objects")
-    return selection
 
 
 def combine(objs):

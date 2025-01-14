@@ -2,10 +2,11 @@ import maya.cmds as cmds  # type: ignore
 
 from importlib import reload
 
-from maya_handler import center_objects, pivot_to_bottom
+from maya_handler import center_objects, pivot_to_bottom, selection
 
 reload(center_objects)
 reload(pivot_to_bottom)
+reload(selection)
 
 
 def center_floor():
@@ -15,16 +16,9 @@ def center_floor():
 
 def drop_to_floor():
     pivot_to_bottom.pivot_to_bottom()
-    objects = get_selected_objects()
+    objects = selection.get_selected_objects()
     for obj in objects:
         floor_obj(obj)
-
-
-def get_selected_objects():
-    sel = cmds.ls(sl=True, o=True)
-    if not sel:
-        raise RuntimeError("No selection, please select at least one object !")
-    return sel
 
 
 def floor_obj(object):

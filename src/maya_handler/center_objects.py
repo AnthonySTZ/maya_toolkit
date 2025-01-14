@@ -1,17 +1,14 @@
 import maya.cmds as cmds  # type: ignore
+from importlib import reload
+from maya_handler import selection
+
+reload(selection)
 
 
 def center_objects():
-    objects = get_selected_objects()
+    objects = selection.get_selected_objects(flatten=False)
     for obj in objects:
         center_obj(obj)
-
-
-def get_selected_objects():
-    sel = cmds.ls(sl=True, o=True)
-    if not sel:
-        raise RuntimeError("No selection, please select at least one object !")
-    return sel
 
 
 def center_obj(object):
