@@ -23,3 +23,7 @@ def select_faces_from(obj, faces):
     format_faces = logics.convert_face_numbers_to_correct_faces_object(obj, faces)
     cmds.select(clear=True)
     cmds.select(format_faces)
+
+
+def get_shapes_of(objects):
+    return cmds.listRelatives(objects, shapes=True)
