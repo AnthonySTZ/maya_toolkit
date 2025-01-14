@@ -55,3 +55,10 @@ Move selected objects on the grid only on the y-axis.
 
 ![](./readme/before_drop_to_floor.jpg)
 ![](./readme/after_drop_to_floor.jpg)
+
+## Merge curves
+
+Merge multiple curves into one.
+
+![](./readme/unmerge_curves.jpg)
+![](./readme/merge_curves.jpg)
