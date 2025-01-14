@@ -6,7 +6,7 @@ reload(selection)
 
 
 def center_objects():
-    objects = selection.get_selected_objects(flatten=False)
+    objects = selection.get_selected_objects()
     for obj in objects:
         center_obj(obj)
 

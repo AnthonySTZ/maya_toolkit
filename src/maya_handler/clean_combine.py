@@ -6,7 +6,7 @@ reload(selection)
 
 
 def clean_combine():
-    objects = selection.get_selected_objects(flatten=False)
+    objects = selection.get_selected_objects()
     combine(objects)
 
 

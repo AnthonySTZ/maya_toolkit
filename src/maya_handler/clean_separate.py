@@ -6,7 +6,7 @@ reload(selection)
 
 
 def clean_separate():
-    faces = selection.get_selected_objects(flatten=False)
+    faces = selection.get_selected_objects()
     separate(faces)
 
 

@@ -6,7 +6,7 @@ from maya_handler import logics
 reload(logics)
 
 
-def get_selected_objects(flatten):
+def get_selected_objects(flatten=False):
     sel = cmds.ls(sl=True, o=not flatten, flatten=flatten)
     if not sel:
         raise RuntimeError("No selection, please select at least one object !")

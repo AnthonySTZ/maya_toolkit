@@ -9,7 +9,7 @@ reload(selection)
 def select_every_nth(n):
     if not n.isnumeric():
         return
-    selected_object = selection.get_selected_objects(False)[0]
+    selected_object = selection.get_selected_objects()[0]
     selected_faces = selection.get_selected_faces()
     organize_selected_faces = reorganize_face_selection(selected_object, selected_faces)
     new_selected_faces = logics.keep_every_nth(organize_selected_faces, int(n))
