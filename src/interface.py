@@ -60,6 +60,7 @@ class TootlkitWindow(QDialog):
         self.center_objects_btn = QPushButton("Center objects")
         self.center_floor_btn = QPushButton("Center objects to floor")
         self.drop_to_floor_btn = QPushButton("Drop to floor")
+        self.merge_curves_btn = QPushButton("Merge curves")
 
         main_layout.addWidget(self.select_every_nth_btn)
         main_layout.addWidget(self.clean_combine_btn)
@@ -69,6 +70,7 @@ class TootlkitWindow(QDialog):
         main_layout.addWidget(self.center_objects_btn)
         main_layout.addWidget(self.center_floor_btn)
         main_layout.addWidget(self.drop_to_floor_btn)
+        main_layout.addWidget(self.merge_curves_btn)
 
     def init_logics(self) -> None:
         self.select_every_nth_btn.clicked.connect(
