@@ -1,6 +1,6 @@
 import maya.cmds as cmds  # type: ignore
 from importlib import reload
-import maya_handler.logics as logics
+from maya_handler import logics, selection
 
 reload(logics)
 
@@ -8,30 +8,11 @@ reload(logics)
 def select_every_nth(n):
     if not n.isnumeric():
         return
-    selected_object = get_selected_object()
-    selected_faces = get_selected_faces()
+    selected_object = selection.get_selected_objects(False)[0]
+    selected_faces = selection.get_selected_faces()
     organize_selected_faces = reorganize_face_selection(selected_object, selected_faces)
     new_selected_faces = logics.keep_every_nth(organize_selected_faces, int(n))
     select_faces(selected_object, new_selected_faces)
-
-
-def get_selected_object():
-    selection = get_maya_selection()
-    selected_object = selection[0].split(".")[0]
-    return selected_object
-
-
-def get_selected_faces():
-    selection = get_maya_selection()
-    selected_faces = logics.extract_faces_from_selection(selection)
-    return selected_faces
-
-
-def get_maya_selection():
-    selection = cmds.ls(selection=True, flatten=True)
-    if not selection:
-        raise RuntimeError("No selection found. Please select some faces.")
-    return selection
 
 
 def reorganize_face_selection(obj, faces):
