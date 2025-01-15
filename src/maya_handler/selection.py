@@ -19,6 +19,12 @@ def get_selected_faces():
     return selected_faces
 
 
+def get_selected_edges():
+    selection = get_selected_objects(flatten=True)
+    selected_edges = logics.extract_edges_from_selection(selection)
+    return selected_edges
+
+
 def select_faces_from(obj, faces):
     format_faces = logics.convert_face_numbers_to_correct_faces_object(obj, faces)
     cmds.select(clear=True)

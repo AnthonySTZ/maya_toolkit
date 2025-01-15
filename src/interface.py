@@ -62,7 +62,7 @@ class TootlkitWindow(QDialog):
                 ["Select every nth faces", lambda _: SelectEveryNthDialog().exec_()],
                 [
                     "Contained faces",
-                    lambda _: select_contained_faces.select_contained_faces,
+                    select_contained_faces.select_contained_faces,
                 ],
             ],
         )

@@ -2,16 +2,28 @@ def extract_faces_from_selection(selection):
     faces = []
     for sel in selection:
         if is_face(sel):
-            faces.extend(get_face_number_from(sel))
+            faces.extend(get_component_number_from(sel, "f"))
     return faces
+
+
+def extract_edges_from_selection(selection):
+    edges = []
+    for sel in selection:
+        if is_edge(sel):
+            edges.extend(get_component_number_from(sel, "e"))
+    return edges
 
 
 def is_face(sel):
     return ".f[" in sel
 
 
-def get_face_number_from(face):
-    number = face.split(".f[")[1][:-1]
+def is_edge(sel):
+    return ".e[" in sel
+
+
+def get_component_number_from(component, type):
+    number = component.split("." + type + "[")[1][:-1]
     if ":" not in number:
         return [int(number)]
 
