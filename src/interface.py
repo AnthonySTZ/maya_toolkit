@@ -26,6 +26,7 @@ from maya_handler import (
     restore_translate,
     center_objects,
     merge_curves,
+    select_contained_faces,
 )
 
 reload(select_every)
@@ -36,6 +37,7 @@ reload(restore_translate)
 reload(center_objects)
 reload(drop_to_floor)
 reload(merge_curves)
+reload(select_contained_faces)
 
 
 class TootlkitWindow(QDialog):
@@ -58,7 +60,10 @@ class TootlkitWindow(QDialog):
             "Selection",
             [
                 ["Select every nth faces", lambda _: SelectEveryNthDialog().exec_()],
-                ["Contained faces", lambda _: print("Yes")],
+                [
+                    "Contained faces",
+                    lambda _: select_contained_faces.select_contained_faces,
+                ],
             ],
         )
 
