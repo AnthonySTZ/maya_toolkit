@@ -56,7 +56,10 @@ class TootlkitWindow(QDialog):
 
         selection_row = Row(
             "Selection",
-            [["Select every nth faces", lambda _: SelectEveryNthDialog().exec_()]],
+            [
+                ["Select every nth faces", lambda _: SelectEveryNthDialog().exec_()],
+                ["Contained faces", lambda _: print("Yes")],
+            ],
         )
 
         object_row = Row(
